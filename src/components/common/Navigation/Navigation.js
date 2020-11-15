@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import service from "../../../axios/axios-repository"
-import $ from "jquery";
-import NavGasses from "./NavGasses";
-import ToogleSwitch from "../ToogleSwitch/ToogleSwitch";
-import NavYear from "./NavYear";
 import NavCategory from "./NavCategory";
-
+import NavGasses from "./NavGasses";
+// import ToogleSwitch from "./ToogleSwitch/ToogleSwitch";
+import NavYear from "./NavYear";
+import $ from 'jquery';
+import 'metismenu'
 
 class Navigation extends Component {
 
@@ -21,7 +21,7 @@ class Navigation extends Component {
     }
 
     componentDidMount() {
-        // const {menu} = this.refs;
+        // const {menu} = React.createRef();
         // $(menu).metisMenu();
         this.loadCategories();
         this.loadGasses();
@@ -29,7 +29,7 @@ class Navigation extends Component {
     }
 
     activeRoute(routeName) {
-        return  "active";
+        return this.props.location.pathname.indexOf(routeName) > -1 ? "active" : "";
     }
 
     secondLevelActive(routeName) {
@@ -88,42 +88,43 @@ class Navigation extends Component {
         }
         return (
             <nav className="navbar-default navbar-static-side" role="navigation">
-                <ul className="nav metismenu" id="side-menu">
-                    <li className="nav-label" style={{padding: "10%"}}>
-                        {/*<ToogleSwitch/>*/}
-                        <select value={this.state.years[0]}>
-                            {this.state.years.map(y => <NavYear year={y} key={y.id}/>)}
-                        </select>
-                    </li>
-                    <li className={"text-white"}>
-                        <Link to="collapseExample" data-toggle="collapse" role="button" aria-expanded="false"
-                              aria-controls="collapseExample">
-                            <i className="fa fa-list-ul"/>
-                            <span className="nav-label">Гасови</span>
-                            <span className="fa arrow"/>
-                        </Link>
-                        <ul className="nav collapse" id={"collapseExample"}>
-                            {this.state.gasses.map(g => <NavGasses gas={g} key={g.id}/>)}
-                        </ul>
-                    </li>
+                <div className="sidebar-collapse">
+                    <ul className="nav metismenu" id="side-menu" ref="menu">
+                        <li className="nav-label" style={{padding: "10%"}}>
+                            {/*<ToogleSwitch/>*/}
+                            <select value={this.state.years[0]}>
+                                {this.state.years.map(y => <NavYear year={y} key={y.id}/>)}
+                            </select>
+                        </li>
+                        <li className={"text-white"}>
+                            <Link to="collapseExample" data-toggle="collapse" role="button" aria-expanded="false"
+                                  aria-controls="collapseExample">
+                                <i className="fa fa-list-ul"/>
+                                <span className="nav-label">Гасови</span>
+                                <span className="fa arrow"/>
+                            </Link>
+                            <ul className="nav collapse" id={"collapseExample"}>
+                                {this.state.gasses.map(g => <NavGasses gas={g} key={g.id}/>)}
+                            </ul>
+                        </li>
 
 
-                    <li className={this.activeRoute("/")}>
+                        <li className={this.activeRoute("/")}>
 
-                        <Link to="/minor"><i className="fa fa-sitemap"/>
-                            <span className="nav-label">Категории</span>
-                            <span className="fa arrow"/>
-                        </Link>
-                        <ul className="nav nav-second-level collapse">
-                            {
-                                this.state.categories.map(c => <NavCategory category={c} key={c.id}/>)
-                            }
-                        </ul>
-                    </li>
-                </ul>
-
+                            <Link to="/minor"><i className="fa fa-sitemap"/>
+                                <span className="nav-label">Категории</span>
+                                <span className="fa arrow"/>
+                            </Link>
+                            <ul className="nav nav-second-level collapse">
+                                {
+                                    this.state.categories.map(c => <NavCategory category={c} key={c.id}/>)
+                                }
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </nav>
-            )
+        )
     }
 }
 

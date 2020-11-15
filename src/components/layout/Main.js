@@ -1,12 +1,16 @@
-import React from 'react'
-import Navigation from "../common/Navigation/Navigation";
-import TopHeader from "../common/TopHeader";
-import Footer from "../common/Footer/Footer";
+import React from 'react';
+import Progress from '../common/Progress';
+import Navigation from '../common/Navigation/Navigation';
+import Footer from '../common/Footer/Footer';
+import TopHeader from '../common/TopHeader';
+import { correctHeight, detectBody } from './Helpers';
+import $ from 'jquery'
+import MainView from "./Views/MainView";
 
 class Main extends React.Component {
 
     render() {
-        let wrapperClass = "gray-bg ";
+        let wrapperClass = "gray-bg " + this.props.location.pathname;
         return (
             <div id="wrapper">
                 {/*<Progress />*/}
@@ -14,9 +18,10 @@ class Main extends React.Component {
 
                 <div id="page-wrapper" className={wrapperClass}>
 
-                    <TopHeader />
+                    {/*<TopHeader />*/}
 
                     {this.props.children}
+                    {/*<MainView/>*/}
 
                     <Footer />
 
@@ -30,17 +35,17 @@ class Main extends React.Component {
     componentDidMount() {
 
         // Run correctHeight function on load and resize window event
-        // $(window).bind("load resize", function() {
-        //     correctHeight();
-        //     detectBody();
-        // });
-        //
-        // // Correct height of wrapper after metisMenu animation.
-        // $('.metismenu a').click(() => {
-        //     setTimeout(() => {
-        //         correctHeight();
-        //     }, 300)
-        // });
+        $(window).bind("load resize", function() {
+            correctHeight();
+            detectBody();
+        });
+
+        // Correct height of wrapper after metisMenu animation.
+        $('.metismenu a').click(() => {
+            setTimeout(() => {
+                correctHeight();
+            }, 300)
+        });
     }
 }
 

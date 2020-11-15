@@ -88,7 +88,7 @@ class Navigation extends Component {
         }
         return (
             <nav className="navbar-default navbar-static-side" role="navigation">
-                <ul className="nav metismenu" id="side-menu" ref="menu">
+                <ul className="nav metismenu" id="side-menu">
                     <li className="nav-label" style={{padding: "10%"}}>
                         {/*<ToogleSwitch/>*/}
                         <select value={this.state.years[0]}>
@@ -123,7 +123,7 @@ class Navigation extends Component {
                 </ul>
 
             </nav>
-        )
+            )
     }
 }
 

@@ -1,7 +1,10 @@
 import React from 'react';
-// import { Dropdown } from 'react-bootstrap';
-// import { smoothlyMenu } from '../layouts/Helpers';
+import { Dropdown } from 'react-bootstrap';
+import { smoothlyMenu } from '../layout/Helpers';
 import $ from "jquery";
+import 'bootstrap'
+import 'animate.css'
+// import 'font-awesome'
 
 class TopHeader extends React.Component {
 
@@ -21,7 +24,7 @@ class TopHeader extends React.Component {
                     <ul className="nav navbar-top-links navbar-right">
                         <li>
                             <a href="#">
-                                <i className="fa fa-sign-out"></i> Log out
+                                <i className="fa fa-sign-out"/> Log out
                             </a>
                         </li>
                     </ul>
